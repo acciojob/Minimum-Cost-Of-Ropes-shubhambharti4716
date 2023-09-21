@@ -37,4 +37,57 @@ function calculateMinCost() {
   resultElement.textContent = totalCost;
 }
 
-// Rest of the code for heapify, extractMin, and insert functions as provided earlier
+// Function to heapify a subtree rooted at the given index
+function heapify(arr, i) {
+  const n = arr.length;
+  let smallest = i;
+  const left = 2 * i + 1;
+  const right = 2 * i + 2;
+
+  if (left < n && arr[left] < arr[smallest]) {
+    smallest = left;
+  }
+
+  if (right < n && arr[right] < arr[smallest]) {
+    smallest = right;
+  }
+
+  if (smallest !== i) {
+    // Swap arr[i] and arr[smallest]
+    [arr[i], arr[smallest]] = [arr[smallest], arr[i]];
+
+    // Recursively heapify the affected sub-tree
+    heapify(arr, smallest);
+  }
+}
+
+// Function to extract the minimum element from the min-heap
+function extractMin(arr) {
+  const root = arr[0];
+  const lastElement = arr.pop();
+
+  if (arr.length > 0) {
+    arr[0] = lastElement;
+    heapify(arr, 0);
+  }
+
+  return root;
+}
+
+// Function to insert a new element into the min-heap
+function insert(arr, element) {
+  arr.push(element);
+  let i = arr.length - 1;
+
+  // Fix the min-heap property
+  while (i > 0) {
+    const parent = Math.floor((i - 1) / 2);
+    if (arr[i] < arr[parent]) {
+      // Swap arr[i] and arr[parent]
+      [arr[i], arr[parent]] = [arr[parent], arr[i]];
+      i = parent;
+    } else {
+      break;
+    }
+  }
+}
