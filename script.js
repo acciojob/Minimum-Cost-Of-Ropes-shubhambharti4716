@@ -1,3 +1,10 @@
+const readline = require('readline');
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
 function calculateMinCost(arr) {
   if (arr.length === 0) return 0;
 
@@ -100,3 +107,10 @@ class MinHeap {
     }
   }
 }
+
+rl.question('Enter rope lengths separated by spaces: ', (input) => {
+  const ropeLengths = input.split(' ').map(Number);
+  const result = calculateMinCost(ropeLengths);
+  console.log(`Minimum Cost: ${result}`);
+  rl.close();
+});
