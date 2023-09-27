@@ -74,7 +74,7 @@ class MinHeap {
 }
 
 function calculateMinCost(arr) {
-  if (arr.length === 0) return 0;
+  if (arr?.length === 0) return 0; // Use optional chaining here
 
   // Create a priority queue (min-heap) to store rope lengths
   const minHeap = new MinHeap();
