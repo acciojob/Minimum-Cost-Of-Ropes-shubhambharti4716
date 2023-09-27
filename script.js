@@ -72,6 +72,20 @@ class MinHeap {
     }
   }
 }
+// Utility function to check if a variable is iterable
+function isIterable(obj) {
+  return obj != null && typeof obj[Symbol.iterator] === 'function';
+}
+
+// Example usage:
+const inputArray = [1, 2, 3, 4]; // Replace with your input data
+
+if (isIterable(inputArray)) {
+  const result = calculateMinCost(inputArray);
+  console.log("Result:", result);
+} else {
+  console.error("Input is not iterable. Please provide a valid iterable.");
+}
 
 function calculateMinCost(arr) {
   if (!arr) return 0; // Handle the case when arr is falsy (e.g., undefined or null)
