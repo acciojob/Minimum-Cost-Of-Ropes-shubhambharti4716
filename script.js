@@ -74,10 +74,11 @@ class MinHeap {
 }
 
 function calculateMinCost(arr) {
-  // Check if arr is an array or another iterable
-  if (!Array.isArray(arr) && !arr[Symbol.iterator]) {
-    // Handle the case when arr is not iterable (e.g., show an error message)
-    return 0;
+  if (!arr) return 0; // Handle the case when arr is falsy (e.g., undefined or null)
+  
+  // Convert non-iterable inputs to an array (assuming it's a single value)
+  if (!Array.isArray(arr)) {
+    arr = [arr];
   }
 
   // Create a priority queue (min-heap) to store rope lengths
