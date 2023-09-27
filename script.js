@@ -1,38 +1,3 @@
-const readline = require('readline');
-
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
-
-function calculateMinCost(arr) {
-  if (arr.length === 0) return 0;
-
-  // Create a priority queue (min-heap) to store rope lengths
-  const minHeap = new MinHeap();
-
-  // Insert all rope lengths into the min-heap
-  for (const rope of arr) {
-    minHeap.insert(rope);
-  }
-
-  let totalCost = 0;
-
-  // Connect ropes until there's only one rope left in the heap
-  while (minHeap.heap.length > 1) {
-    const rope1 = minHeap.extractMin();
-    const rope2 = minHeap.extractMin();
-
-    const combinedCost = rope1 + rope2;
-    totalCost += combinedCost;
-
-    // Insert the combined rope back into the min-heap
-    minHeap.insert(combinedCost);
-  }
-
-  return totalCost;
-}
-
 class MinHeap {
   constructor() {
     this.heap = [];
@@ -108,9 +73,30 @@ class MinHeap {
   }
 }
 
-rl.question('Enter rope lengths separated by spaces: ', (input) => {
-  const ropeLengths = input.split(' ').map(Number);
-  const result = calculateMinCost(ropeLengths);
-  console.log(`Minimum Cost: ${result}`);
-  rl.close();
-});
+function calculateMinCost(arr) {
+  if (arr.length === 0) return 0;
+
+  // Create a priority queue (min-heap) to store rope lengths
+  const minHeap = new MinHeap();
+
+  // Insert all rope lengths into the min-heap
+  for (const rope of arr) {
+    minHeap.insert(rope);
+  }
+
+  let totalCost = 0;
+
+  // Connect ropes until there's only one rope left in the heap
+  while (minHeap.heap.length > 1) {
+    const rope1 = minHeap.extractMin();
+    const rope2 = minHeap.extractMin();
+
+    const combinedCost = rope1 + rope2;
+    totalCost += combinedCost;
+
+    // Insert the combined rope back into the min-heap
+    minHeap.insert(combinedCost);
+  }
+
+  return totalCost;
+}
